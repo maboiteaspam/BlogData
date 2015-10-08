@@ -9,7 +9,7 @@
   },
   "autoload": {
     "psr-4": {
-      "C\\Blog\\": "src/C"
+      "C\\BlogData\\": "src/C"
     }
   }
 }
