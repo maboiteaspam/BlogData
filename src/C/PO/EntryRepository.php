@@ -2,9 +2,9 @@
 namespace C\BlogData\PO;
 
 use C\BlogData\EntryRepositoryInterface;
-use C\Repository\TagableRepository;
+use C\Repository\Repository;
 
-class EntryRepository extends TagableRepository implements EntryRepositoryInterface {
+class EntryRepository extends Repository implements EntryRepositoryInterface {
 
     public $data = [];
     public function __construct() {

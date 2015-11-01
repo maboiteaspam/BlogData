@@ -3,27 +3,38 @@ namespace C\BlogData\Eloquent;
 
 use C\BlogData\CommentRepositoryInterface;
 use C\Misc\Utils;
-use C\Repository\TagableEloquentRepository;
+use C\Repository\EloquentRepository;
+use Illuminate\Database\Query\Builder;
 
-class CommentRepository extends TagableEloquentRepository implements CommentRepositoryInterface {
+class CommentRepository extends EloquentRepository implements CommentRepositoryInterface {
 
     /**
-     * @return string
+     * @return Builder
+     */
+    public function all() {
+        return $this->capsule->getConnection()
+            ->table('blog_entry')
+            ;
+    }
+
+    /**
+     * @return Builder
      */
     public function lastUpdateDate() {
-        return $this->capsule->getConnection()
-            ->table('blog_comment')
+        return $this->all()
             ->take(1)
             ->orderBy('updated_at','DESC')
-            ->first(['updated_at']);
+            ->select(['updated_at']);
     }
 
     /**
      * @param $id
-     * @return mixed
+     * @return Builder
      */
     public function lastUpdatedByEntryId($id) {
-        return $this->byEntryId($id)[0]->updated_at;
+        return $this
+            ->byEntryId($id)
+            ->select(['updated_at']);
     }
 
     /**
@@ -31,8 +42,7 @@ class CommentRepository extends TagableEloquentRepository implements CommentRepo
      * @return int
      */
     public function insert($data) {
-        return $this->capsule->getConnection()
-            ->table('blog_comment')
+        return $this->all()
             ->insertGetId(Utils::objectToArray($data));
     }
 
@@ -40,31 +50,29 @@ class CommentRepository extends TagableEloquentRepository implements CommentRepo
      * @param $id
      * @param int $from
      * @param int $length
-     * @return array|static[]
+     * @return Builder
      */
     public function byEntryId($id, $from=0, $length=5) {
-        return $this->capsule->getConnection()
-            ->table('blog_comment')
+        return $this->all()
             ->where('blog_entry_id', '=', $id)
             ->offset($from)
             ->take($length)
             ->orderBy('updated_at','DESC')
-            ->get();
+            ;
     }
 
     /**
      * @param array $excludesEntries
      * @param int $page
      * @param int $by
-     * @return array|static[]
+     * @return Builder
      */
     public function mostRecent($excludesEntries=[], $page=0, $by=5) {
-        return $this->capsule->getConnection()
-            ->table('blog_comment')
+        return $this->all()
             ->whereNotIn('blog_entry_id', $excludesEntries)
             ->offset($page*$by)
             ->take($by)
             ->orderBy('updated_at', 'DESC')
-            ->get();
+            ;
     }
 }

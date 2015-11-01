@@ -2,6 +2,8 @@
 
 namespace C\BlogData;
 
+// @todo data providers does not need the whole silex stack, they only need some interface definitions
+// @todo this would help to reduce dependencies to their minimum.
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use \C\BlogData\PO as PO;

@@ -1,23 +1,10 @@
 <?php
 namespace C\BlogData;
 
-use C\Repository\TagableRepositoryInterface;
-
-interface EntryRepositoryInterface extends TagableRepositoryInterface {
+interface EntryRepositoryInterface {
 
     /**
-     * @param $tager
-     * @return EntryRepositoryInterface
-     */
-    public function tagable($tager=null);
-
-    /**
-     * @return EntryRepositoryInterface
-     */
-    public function tager();
-
-    /**
-     * @return string
+     * @return mixed
      */
     public function lastUpdateDate();
 
@@ -29,19 +16,19 @@ interface EntryRepositoryInterface extends TagableRepositoryInterface {
 
     /**
      * @param $id
-     * @return array
+     * @return mixed
      */
     public function byId($id);
 
     /**
      * @param int $page
      * @param int $by
-     * @return array
+     * @return mixed
      */
     public function mostRecent($page=0, $by=20);
 
     /**
-     * @return array
+     * @return int
      */
     public function countAll();
 }

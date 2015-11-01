@@ -3,19 +3,29 @@ namespace C\BlogData\Eloquent;
 
 use C\BlogData\EntryRepositoryInterface;
 use C\Misc\Utils;
-use C\Repository\TagableEloquentRepository;
+use C\Repository\EloquentRepository;
+use Illuminate\Database\Query\Builder;
 
-class EntryRepository extends TagableEloquentRepository implements EntryRepositoryInterface {
+class EntryRepository extends EloquentRepository implements EntryRepositoryInterface {
 
     /**
-     * @return array
+     * @return Builder
      */
-    public function lastUpdateDate() {
+    public function all() {
         return $this->capsule->getConnection()
             ->table('blog_entry')
+            ;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function lastUpdateDate() {
+        return $this->all()
             ->take(1)
             ->orderBy('updated_at','DESC')
-            ->first(['updated_at']);
+            ->select(['updated_at'])
+            ;
     }
 
     /**
@@ -23,43 +33,37 @@ class EntryRepository extends TagableEloquentRepository implements EntryReposito
      * @return int
      */
     public function insert($data) {
-        return $this->capsule->getConnection()
-            ->table('blog_entry')
+        return $this->all()
             ->insertGetId(Utils::objectToArray($data));
     }
 
     /**
      * @param $id
-     * @return mixed
+     * @return Builder
      */
     public function byId($id) {
-        return $this->capsule->getConnection()
-            ->table('blog_entry')
+        return $this->all()
             ->where('id', '=', $id)
-            ->take(1)
-            ->first();
+            ->take(1);
     }
 
     /**
      * @param int $page
      * @param int $by
-     * @return array|static[]
+     * @return Builder
      */
     public function mostRecent($page=0, $by=5) {
-        return $this->capsule->getConnection()
-            ->table('blog_entry')
+        return $this->all()
             ->offset($page*$by)
             ->take($by)
-            ->orderBy('updated_at', 'DESC')
-            ->get();
+            ->orderBy('updated_at', 'DESC');
     }
 
     /**
      * @return int
      */
     public function countAll() {
-        return $this->capsule->getConnection()
-            ->table('blog_entry')
+        return $this->all()
             ->count('id');
     }
 }

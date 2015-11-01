@@ -1,30 +1,16 @@
 <?php
 namespace C\BlogData;
 
-use C\Repository\TagableRepositoryInterface;
-
-interface CommentRepositoryInterface extends TagableRepositoryInterface{
+interface CommentRepositoryInterface{
 
     /**
-     * @param $tager
-     * @return CommentRepositoryInterface
-     */
-    public function tagable($tager=null);
-
-    /**
-     * @return CommentRepositoryInterface
-     */
-    public function tager();
-
-
-    /**
-     * @return string
+     * @return mixed
      */
     public function lastUpdateDate();
 
     /**
      * @param $id
-     * @return string
+     * @return mixed
      */
     public function lastUpdatedByEntryId($id);
 
@@ -38,7 +24,7 @@ interface CommentRepositoryInterface extends TagableRepositoryInterface{
      * @param $id
      * @param int $from
      * @param int $length
-     * @return array
+     * @return mixed
      */
     public function byEntryId($id, $from=0, $length=5);
 
@@ -46,7 +32,7 @@ interface CommentRepositoryInterface extends TagableRepositoryInterface{
      * @param array $excludesEntries
      * @param int $page
      * @param int $by
-     * @return array
+     * @return mixed
      */
     public function mostRecent($excludesEntries=[], $page=0, $by=20);
 }

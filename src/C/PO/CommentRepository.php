@@ -2,9 +2,9 @@
 namespace C\BlogData\PO;
 
 use C\BlogData\CommentRepositoryInterface;
-use C\Repository\TagableRepository;
+use C\Repository\Repository;
 
-class CommentRepository extends TagableRepository implements CommentRepositoryInterface {
+class CommentRepository extends Repository implements CommentRepositoryInterface {
 
     public $data = [];
     public function __construct() {
