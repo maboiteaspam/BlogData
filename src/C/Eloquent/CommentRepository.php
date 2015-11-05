@@ -13,7 +13,7 @@ class CommentRepository extends EloquentRepository implements CommentRepositoryI
      */
     public function all() {
         return $this->capsule->getConnection()
-            ->table('blog_entry')
+            ->table('blog_comment')
             ;
     }
 
