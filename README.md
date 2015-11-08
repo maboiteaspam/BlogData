@@ -71,18 +71,24 @@ work with a simple blog data model.
 
 #### Entities
 
-- ling to BlogEntry
-- ling to BlogComment
+- [Entry](https://github.com/maboiteaspam/BlogData/blob/master/src/C/Entity/Entry.php)
+- [Comment](https://github.com/maboiteaspam/BlogData/blob/master/src/C/Entity/Comment.php)
+
+#### Modifiers
+
+- [Entry](https://github.com/maboiteaspam/BlogData/blob/master/src/C/Modifier/Entry.php)
+- [Comment](https://github.com/maboiteaspam/BlogData/blob/master/src/C/Modifier/Comment.php)
 
 #### Schemas
 
-- ling to BlogEntry
-- ling to BlogComment
+- [Eloquent](https://github.com/maboiteaspam/BlogData/blob/master/src/C/Eloquent/Schema.php)
+- [PO](https://github.com/maboiteaspam/BlogData/blob/master/src/C/PO/Schema.php)
 
 #### Fixtures
 
-- ling to BlogEntry
-- ling to BlogComment
+- [generator](https://github.com/maboiteaspam/BlogData/blob/master/src/C/fixtures/blog-entries.php)
+- [simple](https://github.com/maboiteaspam/BlogData/blob/master/src/C/fixtures/blog-entries-old.php)
+
 
 ## Example
 
