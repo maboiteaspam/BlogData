@@ -9,6 +9,13 @@ use Silex\ServiceProviderInterface;
 use \C\BlogData\PO as PO;
 use \C\BlogData\Eloquent as Eloquent;
 
+/**
+ * Class ServiceProvider
+ * provides blog data services
+ * to connect your application with.
+ *
+ * @package C\BlogData
+ */
 class ServiceProvider implements ServiceProviderInterface
 {
     /**
@@ -16,8 +23,12 @@ class ServiceProvider implements ServiceProviderInterface
      **/
     public function register(Application $app)
     {
-        if (!isset($app['blogdata.provider'])) $app['blogdata.provider'] = 'PO';
+        // define the underlying data provider type
+        // Eloquent or PO
+        if (!isset($app['blogdata.provider']))
+            $app['blogdata.provider'] = 'PO';
 
+        // provides blog entry data services
         $app['blogdata.entry'] = $app->share(function () use($app) {
             $repo = null;
             if ($app['blogdata.provider']==='PO') {
@@ -30,6 +41,7 @@ class ServiceProvider implements ServiceProviderInterface
             return $repo;
         });
 
+        // provides blog entry's comment data services
         $app['blogdata.comment'] = $app->share(function () use($app) {
             $repo = null;
             if ($app['blogdata.provider']==='PO') {
@@ -42,6 +54,8 @@ class ServiceProvider implements ServiceProviderInterface
             return $repo;
         });
 
+        // provides blog entry and comment
+        // schema services
         $app['blogdata.schema'] = $app->share(function () use($app) {
             $schema = null;
             if ($app['blogdata.provider']==='PO') {
@@ -52,13 +66,11 @@ class ServiceProvider implements ServiceProviderInterface
             return $schema;
         });
     }
-    /**
-     * @param Application $app Silex application instance.
-     *
-     * @return void
-     **/
+
     public function boot(Application $app)
     {
+        // if capsule service provider is connected
+        // register the blog schema service.
         if (isset($app['capsule.schema'])) {
             $app['capsule.schema']->register($app['blogdata.schema']);
         }

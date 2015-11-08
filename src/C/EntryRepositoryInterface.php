@@ -1,6 +1,11 @@
 <?php
 namespace C\BlogData;
 
+/**
+ * Interface EntryRepositoryInterface
+ *
+ * @package C\BlogData
+ */
 interface EntryRepositoryInterface {
 
     /**

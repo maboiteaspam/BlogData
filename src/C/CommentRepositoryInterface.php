@@ -1,6 +1,11 @@
 <?php
 namespace C\BlogData;
 
+/**
+ * Interface CommentRepositoryInterface
+ *
+ * @package C\BlogData
+ */
 interface CommentRepositoryInterface{
 
     /**
