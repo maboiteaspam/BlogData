@@ -3,10 +3,10 @@ namespace C\BlogData\Eloquent;
 
 use C\BlogData\CommentRepositoryInterface;
 use C\Misc\Utils;
-use C\Repository\EloquentRepository;
 use Illuminate\Database\Query\Builder;
 
-class CommentRepository extends EloquentRepository implements CommentRepositoryInterface {
+class CommentRepository
+    extends \C\Eloquent\Repository implements CommentRepositoryInterface {
 
     /**
      * @return Builder

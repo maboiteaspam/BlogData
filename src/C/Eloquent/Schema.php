@@ -2,12 +2,12 @@
 
 namespace C\BlogData\Eloquent;
 
-use \C\Schema\EloquentSchema;
 use \Illuminate\Database\Schema\Blueprint;
 use \C\BlogData\Eloquent\EntryRepository as Entry;
 use \C\BlogData\Eloquent\CommentRepository as Comment;
 
-class Schema extends  EloquentSchema{
+class Schema
+    extends \C\Eloquent\Schema{
     public function createTables() {
         $builder = $this->capsule->getConnection()->getSchemaBuilder();
         $builder->create('blog_entry', function(Blueprint $table) {

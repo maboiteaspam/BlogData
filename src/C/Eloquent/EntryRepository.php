@@ -3,10 +3,10 @@ namespace C\BlogData\Eloquent;
 
 use C\BlogData\EntryRepositoryInterface;
 use C\Misc\Utils;
-use C\Repository\EloquentRepository;
 use Illuminate\Database\Query\Builder;
 
-class EntryRepository extends EloquentRepository implements EntryRepositoryInterface {
+class EntryRepository
+    extends \C\Eloquent\Repository implements EntryRepositoryInterface {
 
     /**
      * @return Builder
